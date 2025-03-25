@@ -1,12 +1,20 @@
+'use strict';
+const fs = require('fs');
 const path = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(path).toString().trim().split('\n');
+const outputPath = './output.txt';
+let input = require('fs').readFileSync(path).toString().trim().split('\n').map(Number);
+// let output = require('fs').readFileSync(outputPath, { encoding: 'utf8' });
+const arr = Array.from({ length: 10 }, () => 0);
+let product = 1;
 
-const array = Array(10).fill(0);
+// 곱연산
+for (let i = 0; i < input.length; i++) {
+  product *= input[i];
+}
 
-const [A, B, C] = input.map(Number);
-const multipleResult = A * B * C;
+const productArr = product.toString().split('').map(Number);
+for (let j = 0; j < productArr.length; j++) {
+  arr[productArr[j]]++;
+}
 
-const splitArr = [...String(multipleResult)].map(Number);
-splitArr.forEach((el) => array[el]++);
-
-array.forEach((el) => console.log(el));
+console.log(arr.join('\n'));
