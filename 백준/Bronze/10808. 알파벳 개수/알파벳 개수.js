@@ -1,9 +1,14 @@
+'use strict';
+const fs = require('fs');
 const path = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(path).toString().trim();
+const outputPath = './output.txt';
+let input = require('fs').readFileSync(path).toString().trim();
+// let output = require('fs').readFileSync(outputPath, { encoding: 'utf8' });
+const arr = Array.from({ length: 26 }, () => 0);
 
-const arr = Array(26).fill(0);
+const alphabetInput = input.split('');
+alphabetInput.forEach((alphabet) => {
+  arr[alphabet.charCodeAt() - 97]++;
+});
 
-for (let i = 0; i < input.length; i++) {
-  arr[input.charCodeAt(i) - 97]++;
-}
-console.log(...arr);
+console.log(arr.join(' '));
