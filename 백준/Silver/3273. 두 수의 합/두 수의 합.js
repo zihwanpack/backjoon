@@ -1,34 +1,27 @@
+'use strict';
 const path = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(path).toString().trim().split('\n');
-const [n, arr, targetData] = input;
+let input = require('fs').readFileSync(path).toString().trim().split('\n');
 
-const numArr = arr
+let n = Number(input[0]);
+let arr = input[1]
   .split(' ')
   .map(Number)
   .sort((a, b) => a - b);
+let x = Number(input[2]);
 
-let count = 0;
-
-const twoSum = (arr, target) => {
-  let left = 0;
-  let right = arr.length - 1;
-
-  while (left < right) {
-    const sum = arr[left] + arr[right];
-    if (sum === target) {
-      count++;
-      left++;
-      right--;
-    } else if (sum < target) {
-      left++;
-    } else {
-      right--;
-    }
+let p1 = 0;
+let p2 = n - 1;
+let result = 0;
+while (p1 < p2) {
+  const sum = arr[p1] + arr[p2];
+  if (sum === x) {
+    result++;
+    p1++;
+    p2--;
+  } else if (sum < x) {
+    p1++;
+  } else {
+    p2--;
   }
-};
-
-const target = Number(targetData);
-
-twoSum(numArr, target);
-
-console.log(count);
+}
+console.log(result);
