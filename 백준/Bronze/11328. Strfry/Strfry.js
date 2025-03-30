@@ -1,19 +1,16 @@
-const path = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(path).toString().trim().split('\n');
+const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 
-input.shift();
+let input = require('fs').readFileSync(filePath).toString().trim().split('\n');
 
-function stringSort(data) {
-  return data.split('').sort().join('');
+const N = Number(input.shift());
+
+function checkStrfry(str1, str2) {
+  return str1.split('').sort().join('') === str2.split('').sort().join('')
+    ? console.log('Possible')
+    : console.log('Impossible');
 }
 
-input.forEach((data) => {
-  const [x, y] = data.split(' ');
-  const sortedX = stringSort(x);
-  const sortedY = stringSort(y);
-  if (sortedX === sortedY) {
-    console.log('Possible');
-  } else {
-    console.log('Impossible');
-  }
-});
+for (let i = 0; i < N; i++) {
+  const [firstStr, secondStr] = input[i].split(' ');
+  checkStrfry(firstStr, secondStr);
+}
