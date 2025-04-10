@@ -1,3 +1,11 @@
+'use strict';
+const fs = require('fs');
+const path = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
+const input = fs.readFileSync(path).toString().trim().split('\n');
+const str = input[0];
+const N = Number(input[1]);
+const list = input.slice(2).map((str) => str.split(' '));
+
 class Node {
   constructor(value) {
     this.value = value;
@@ -26,26 +34,17 @@ function deleteNode(node) {
   }
 }
 
-const path = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(path).toString().trim().split('\n');
-const str = input[0];
-const n = Number(input[1]);
-const list = input.slice(2).map((el) => el.split(' '));
-
-// 연결 리스트 초기화
 const head = new Node(null);
 let cursor = head;
 
-// 초기 문자열 넣기
 for (let i = 0; i < str.length; i++) {
   cursor = insertAfter(cursor, str[i]);
 }
 
-// 명령 처리
-for (let i = 0; i < n; i++) {
-  const [cmd, char] = list[i];
+for (let j = 0; j < N; j++) {
+  const [cmd, data] = list[j];
   if (cmd === 'P') {
-    cursor = insertAfter(cursor, char);
+    cursor = insertAfter(cursor, data);
   } else if (cmd === 'L' && cursor.prev) {
     cursor = cursor.prev;
   } else if (cmd === 'D' && cursor.next) {
@@ -57,7 +56,6 @@ for (let i = 0; i < n; i++) {
   }
 }
 
-// 결과 출력
 let result = [];
 let currentNode = head.next;
 while (currentNode) {
