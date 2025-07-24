@@ -1,18 +1,13 @@
 function solution(participant, completion) {
-    let answer = '';
-    const participantMap = new Map();
+    const answer = [];
+    const sortedP = participant.sort();
+    const sortedC = completion.sort();
     
-    participant.forEach(man => {
-        participantMap.get(man) ? participantMap.set(man, participantMap.get(man) + 1) : participantMap.set(man, 1);
-    })
-    
-    completion.forEach(man => {
-        participantMap.get(man) && participantMap.set(man, participantMap.get(man) - 1);
-    })
-    for (let man of participantMap) {
-        const [name, count] = man;
-        if (count === 1) answer += name;
+    for (let i = 0; i < sortedP.length; i++) {
+        if (sortedP[i] !== sortedC[i]) {
+            answer.push(sortedC[i]);
+        }
     }
-    
-    return answer;
+    console.log(...answer);
+    // return answer;
 }
