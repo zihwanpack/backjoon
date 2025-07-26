@@ -1,12 +1,11 @@
 function solution(arr)
 {
-    const stack = [];
+    const answer = [];
 
     arr.forEach(num => {
-        if (stack[stack.length - 1] !== num) {
-            stack.push(num)
-        };
-    })
-    
-    return stack;
+        if (answer[answer.length - 1] !== num) {
+        answer.push(num);
+        }
+    })    
+    return answer;
 }
