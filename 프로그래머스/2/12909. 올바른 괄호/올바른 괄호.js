@@ -1,10 +1,10 @@
 function solution(s){
-    let answer = true;
-    const stack = [];
+    let count = 0;
     
-    for (let i = 0; i < s.length; i++) {
-        (stack[stack.length - 1] === '(' && s[i] === ')') ? stack.pop() : stack.push(s[i]);
+    for (let str of s) {
+        if (count === -1) return false
+        str === '(' ? count++ : count--; 
     }
     
-    return stack.length ? false : true
+    return count === 0 ? true : false;
 }
