@@ -1,25 +1,29 @@
-function solution(progresses, speeds) {
+function makeDays(progresses, speeds) {
+    const days = progresses.map((progress, i) => Math.ceil((100 - progress) / speeds[i]));
+    return days;
+}
+
+function makeAnswer (days) {
     const answer = [];
-    const array = [];
-    let count = 0;
+    let standardDay = days[0];
+    let count = 1;
     
-    
-    for (let i = 0; i < progresses.length; i++) {
-        const date = Math.ceil((100 - progresses[i]) / speeds[i]);
-        array.push(date);
-    }
-    
-    let maxDate = array[0];
-    
-    for (let j = 0; j < array.length; j++) {
-        if (array[j] <= maxDate) {
+    for (let i = 1; i < days.length; i++) {
+        if (standardDay >= days[i]) {
             count++;
         } else {
             answer.push(count);
             count = 1;
-            maxDate = array[j];
+            standardDay = days[i];
         }
     }
+    
     answer.push(count);
+    return answer;
+}
+
+function solution(progresses, speeds) {
+    const days = makeDays(progresses, speeds);
+    const answer = makeAnswer(days);   
     return answer;
 }
