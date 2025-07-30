@@ -1,7 +1,10 @@
 function solution(array, commands) {
     const answer = [];
-    commands.forEach(([i, j, k]) => {
-        answer.push(array.slice(i - 1, j).sort((a, b) => a - b)[k - 1]);
-        })   
+    
+    for (let command of commands) {
+        const [first, end, targetIdx] = command;
+        answer.push(array.slice(first - 1, end).sort((a, b) => a - b)[targetIdx - 1]);
+    }
+    
     return answer;
 }
