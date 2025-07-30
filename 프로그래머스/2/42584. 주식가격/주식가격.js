@@ -1,19 +1,15 @@
 function solution(prices) {
-    const answer = Array(prices.length).fill(0);
-    const stack = [];
-
+    const queue = [];
+    
     for (let i = 0; i < prices.length; i++) {
-        while (stack.length && prices[stack[stack.length - 1]] > prices[i]) {
-            const top = stack.pop();
-            answer[top] = i - top;
+        let time = 0;
+        for (let j = i + 1; j < prices.length; j++) {
+            time++;
+            if (prices[j] < prices[i]) {
+                break;
+            }
         }
-        stack.push(i);
+        queue.push(time);
     }
-
-    while (stack.length) {
-        const top = stack.pop();
-        answer[top] = prices.length - 1 - top;
-    }
-
-    return answer;
+    return queue;
 }
