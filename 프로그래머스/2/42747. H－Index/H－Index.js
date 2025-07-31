@@ -1,8 +1,8 @@
 function solution(citations) {
     let answer = 0;
     citations.sort((a, b) => b - a);
-    citations.forEach((citation, i) => {
-        if (citation > i) answer++;
-    })
-    return answer
+    for (let i = 0; i < citations.length; i++) {
+        if (i + 1 > citations[i]) return i;
     }
+    return citations.length;
+}
