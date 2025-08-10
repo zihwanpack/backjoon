@@ -1,15 +1,20 @@
 function solution(numbers, target) {
     let answer = 0;
-    function dfs (index, currentSum) {
-        if (index === numbers.length) {
-            if (currentSum === target) {
-                answer++;
-            }
-            return;
+    let queue = [0];
+    
+    for (let number of numbers) {
+        const tempQueue = [];
+        for (let sum of queue) {
+            tempQueue.push(sum + number);
+            tempQueue.push(sum - number);
         }
-        dfs (index + 1, currentSum + numbers[index]);
-        dfs (index + 1, currentSum - numbers[index]);
+        queue = tempQueue;
     }
-    dfs(0, 0);
+    for (const sum of queue) {
+        if (sum === target) {
+        answer++;
+        }
+    }
+
     return answer;
 }
