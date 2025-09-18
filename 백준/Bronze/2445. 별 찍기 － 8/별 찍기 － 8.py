@@ -1,6 +1,10 @@
-n = int(input())
+import sys
 
-for i in range(1, n + 1):
-    print("*" * i +  " " * (n * 2 - i * 2) + "*" * i)
-for i in range(n - 1, 0, -1):
-    print("*" * i +  " " * (n * 2 - i * 2) + "*" * i)
+N = int(sys.stdin.readline())
+
+
+for i in range(1, N + 1):
+    print("*" * i + " " * (2 * N - (2 * i)) + "*" * i)
+
+for i in range(N - 1, 0, -1):
+    print("*" * i + " " * (2 * N - (2 * i)) + "*" * i)
