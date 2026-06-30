@@ -1,20 +1,17 @@
-from collections import deque
 def solution(numbers, target):
-    queue = deque()
     answer = 0
-    numbersLength = len(numbers)
-    # 초기 진행
-    queue.append([numbers[0], 0])
-    queue.append([-1 * numbers[0], 0])
-    while queue:
-        currentNumber, index = queue.popleft()
-        # 다음 거 보기
-        index += 1
-        if index < numbersLength:
-            queue.append([currentNumber + numbers[index], index])
-            queue.append([currentNumber - numbers[index], index])
-        else:
-            if currentNumber == target:
+    n = len(numbers)
+    
+    def dfs(current_idx, current_number):
+        # dfs의 탈출 조건 명시
+        nonlocal answer
+        if current_idx == n:
+            if current_number == target:
                 answer += 1
+            return 
+        dfs(current_idx + 1, current_number + numbers[current_idx])
+        dfs(current_idx + 1, current_number - numbers[current_idx])
+        
+    dfs(0, 0)
     
     return answer
