@@ -7,10 +7,11 @@ def solution(scoville, K):
     while scoville[0] < K:
         if len(scoville) < 2:
             return -1
-        first = heapq.heappop(scoville)
-        second = heapq.heappop(scoville)
-        mixed_scoville = first + (second * 2)
-        heapq.heappush(scoville, mixed_scoville)
+        merged_scoville = heapq.heappop(scoville) + (heapq.heappop(scoville) * 2)
+        heapq.heappush(scoville, merged_scoville)
         answer += 1
+    
             
+            
+        
     return answer
