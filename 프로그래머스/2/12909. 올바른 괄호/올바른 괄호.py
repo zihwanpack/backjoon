@@ -5,5 +5,4 @@ def solution(s):
             stack.pop()
         else: 
             stack.append(char)
-    answer =  not bool(len(stack))
-    return answer
+    return not stack
